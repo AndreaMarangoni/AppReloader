@@ -1,0 +1,21 @@
+
+#!/bin/bash
+
+function restartApp { 
+    while(true); do 
+        cp "$1" "$1"Copy; 
+        comp=$(cmp -l "$1" "$1"Copy);  
+        ./$1 &
+	pid=$! 
+        echo "Pid" "$pid";  
+        
+        while [ -z "$comp" ]  ; do 
+            comp=$(cmp -l "$1" "$1"Copy); 
+            sleep 1; 
+        done; 
+    kill -9 "$pid"; 
+    sleep 1;
+    done; 
+}
+
+restartApp "$1"
